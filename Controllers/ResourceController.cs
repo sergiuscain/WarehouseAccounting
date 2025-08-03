@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using WarehouseAccounting.DB;
 using WarehouseAccounting.Models;
 
 namespace WarehouseAccounting.Controllers
@@ -8,26 +11,36 @@ namespace WarehouseAccounting.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        private List<Resource> resources = new List<Resource>
+        private MyDbContext _context;
+        public ResourceController(MyDbContext context)
         {
-           new Resource { Id = 0, IsActive = false, Name = "Null"},
-           new Resource { Id = 1, IsActive = true, Name = "ABS филамент"},
-           new Resource { Id = 2, IsActive = true, Name = "Хотенд"},
-           new Resource { Id = 3, IsActive = true, Name = "PLAA филамент"}
-
-        };
+            _context = context;
+        }
 
         [HttpGet("GetAll")]
         public async Task<ActionResult<List<Resource>>> GetAll()
         {
-            return resources;
+            return await _context.Resources.ToListAsync();
         }
 
         [HttpGet("GetById")]
-        public ActionResult<Resource> GetById(int id)
+        public async Task<ActionResult<Resource>> GetById(Guid id)
         {
-            var result = resources.FirstOrDefault(x => x.Id == id);
-            return result == null ? resources.First() : result;
+            var result = await  _context.Resources.FirstOrDefaultAsync(x => x.Id == id);
+            return result == null ? NotFound() : result;
+        }
+
+        [HttpPost("CreateResource")]
+        public async Task<ActionResult> Create(Resource resource)
+        {
+            //Первое  бизнес правило - запрещено создавать дублиикаты
+            if (await _context.Resources.FirstOrDefaultAsync(r => r.Name == resource.Name || r.Id == resource.Id) == null) 
+            {
+                _context.Resources.Add(resource);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

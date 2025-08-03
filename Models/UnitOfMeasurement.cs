@@ -1,7 +1,7 @@
 ﻿namespace WarehouseAccounting.Models
 {
-    //Ресурс (идентификатор, наименование, состояние)
-    public class Resource 
+    //Единица измерения (идентификатор, наименование, состояние)
+    public class UnitOfMeasurement
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
