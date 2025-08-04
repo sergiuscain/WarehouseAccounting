@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Resources;
+using System.Threading.Tasks;
 using WarehouseAccounting.DB;
 using WarehouseAccounting.Interfaces;
 using WarehouseAccounting.Models;
@@ -12,7 +14,28 @@ namespace WarehouseAccounting.Services
         public ResourceStorage(MyDbContext context)
         {
             _context = context;
+            InitializationResources().Wait();
         }
+        /// <summary>
+        /// Инициализирует базовые ресурсы, если ресурсы отсутствуют (для теста)
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        private async Task InitializationResources()
+        {
+            if(_context.Resources.Count() == 0)
+            {
+                _context.Resources.AddRangeAsync(new List<Resource> {
+                    new Resource {Id = Guid.NewGuid(), IsActive = true, Name = "ABS филамент" },
+                    new Resource {Id = Guid.NewGuid(), IsActive = true, Name = "PLA филамент" },
+                    new Resource {Id = Guid.NewGuid(), IsActive = true, Name = "TPU филамент" },
+                    new Resource {Id = Guid.NewGuid(), IsActive = true, Name = "Хотенд" },
+                    new Resource {Id = Guid.NewGuid(), IsActive = true, Name = "Набор акриловых красок МалевичЪ" }
+                });
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
         /// <summary>
         /// Возвращает все ресурсы
         /// </summary>
