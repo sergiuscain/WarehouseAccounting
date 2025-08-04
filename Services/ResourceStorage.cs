@@ -81,5 +81,15 @@ namespace WarehouseAccounting.Services
             }
             return false;
         }
+        /// <summary>
+        /// Возвращает ресурсы по статусу. false - архивные (не активные)
+        /// </summary>
+        /// <param name="isActive">Является ли ресурс активным</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<List<Resource>> GetResourcesByStatus(bool isActive)
+        {
+            return await _context.Resources.Where(r => r.IsActive == isActive).ToListAsync();
+        }
     }
 }

@@ -41,9 +41,14 @@ namespace WarehouseAccounting.Controllers
             return await _resourceStorage.DeleteById(id);
         }
         [HttpPut("ChangeStatus")]
-        public async Task<bool> ChangeStatus(Guid id)
+        public async Task<ActionResult<bool>> ChangeStatus(Guid id)
         {
             return await _resourceStorage.ChangeStatus(id);
+        }
+        [HttpGet("GetResourcesByStatus")]
+        public async Task<ActionResult<List<Resource>>> GetResourcesByStatus(bool isActive)
+        {
+            return await _resourceStorage.GetResourcesByStatus(isActive);
         }
     }
 }
