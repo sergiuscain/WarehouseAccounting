@@ -19,7 +19,7 @@ namespace WarehouseAccounting.Services
         /// <exception cref="NotImplementedException"></exception>
         private async Task InitializationUnitOfMeasurement()
         {
-            if (_context.Resources.Count() == 0)
+            if (await _context.UnitOfMeasurements.CountAsync() == 0)
             {
                 _context.UnitOfMeasurements.AddRangeAsync(new List<UnitOfMeasurement> {
                     new UnitOfMeasurement {Id = Guid.NewGuid(), IsActive = true, Name = "Кг." },
