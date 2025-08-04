@@ -16,7 +16,10 @@ namespace WarehouseAccounting
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            // Сервисы для работы с базой данных
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlite("Data Source=MyDb.db"));
+            
+            
 
             var app = builder.Build();
 

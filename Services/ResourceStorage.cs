@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WarehouseAccounting.DB;
+using WarehouseAccounting.Interfaces;
 using WarehouseAccounting.Models;
 
 namespace WarehouseAccounting.Services
 {
-    public class ResourceStorage
+    public class ResourceStorage : IResourceStorage
     {
         private MyDbContext _context;
         public ResourceStorage(MyDbContext context)
@@ -16,7 +17,7 @@ namespace WarehouseAccounting.Services
         /// Возвращает все ресурсы
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult<List<Resource>>> GetAll()
+        public async Task<List<Resource>> GetAll()
         {
             return await _context.Resources.ToListAsync();
         }
