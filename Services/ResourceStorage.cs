@@ -52,9 +52,9 @@ namespace WarehouseAccounting.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<bool> DeleteById(Guid id)
+        public async Task<bool> DeleteById(Guid resourceId)
         {
-            var resource = await _context.Resources.FirstOrDefaultAsync(x => x.Id == id);
+            var resource = await GetById(resourceId);
             if (resource != null)
             {
                 _context.Resources.Remove(resource);
@@ -71,7 +71,7 @@ namespace WarehouseAccounting.Services
         /// <exception cref="NotImplementedException"></exception>
         public async Task<bool> ChangeStatus(Guid resourceId)
         {
-            var resource = await _context.Resources.FirstOrDefaultAsync(r => r.Id == resourceId);
+            var resource = await GetById(resourceId);
             if (resource != null)
             {
                 //Меняем статус на противоположный
@@ -90,6 +90,23 @@ namespace WarehouseAccounting.Services
         public async Task<List<Resource>> GetResourcesByStatus(bool isActive)
         {
             return await _context.Resources.Where(r => r.IsActive == isActive).ToListAsync();
+        }
+        /// <summary>
+        /// Переименовывает ресурс
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<bool> ChangeName(Guid resourceId, string name)
+        {
+            var resource = await GetById(resourceId);
+            if (resource != null)
+            {
+                resource.Name = name;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
     }
 }

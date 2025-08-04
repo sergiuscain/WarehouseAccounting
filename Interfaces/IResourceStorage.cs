@@ -11,5 +11,6 @@ namespace WarehouseAccounting.Interfaces
         Task<Resource> GetById(Guid id);
         Task<bool> ChangeStatus(Guid resourceId);
         Task<List<Resource>> GetResourcesByStatus(bool isActive);
+        Task<bool> ChangeName(Guid id, string name);
     }
 }

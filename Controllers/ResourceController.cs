@@ -50,5 +50,10 @@ namespace WarehouseAccounting.Controllers
         {
             return await _resourceStorage.GetResourcesByStatus(isActive);
         }
+        [HttpPut("ChangeResourceNameById")]
+        public async Task<ActionResult<bool>> ChangeResourceNameById(Guid id, string newResourceName)
+        {
+            return await _resourceStorage.ChangeName(id, newResourceName);
+        }
     }
 }
