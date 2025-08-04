@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WarehouseAccounting.DB;
+using WarehouseAccounting.Interfaces;
 using WarehouseAccounting.Models;
 
 namespace WarehouseAccounting.Services
 {
-    public class UnitOfMeasurementStorage
+    public class UnitOfMeasurementStorage : IUnitOfMeasurementStorage
     {
         private MyDbContext _context;
         public UnitOfMeasurementStorage(MyDbContext context)
