@@ -1,6 +1,5 @@
 
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.Design;
 using WarehouseAccounting.DB;
 using WarehouseAccounting.Interfaces;
 using WarehouseAccounting.Services;

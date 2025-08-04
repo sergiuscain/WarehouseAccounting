@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using WarehouseAccounting.DB;
+﻿using Microsoft.AspNetCore.Mvc;
 using WarehouseAccounting.Interfaces;
 using WarehouseAccounting.Models;
 
