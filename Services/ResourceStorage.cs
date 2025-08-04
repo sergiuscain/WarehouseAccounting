@@ -63,5 +63,23 @@ namespace WarehouseAccounting.Services
             }
             return false;
         }
+        /// <summary>
+        /// Меняет статус ресрса на противоположный. Если ресурс активен, делает его НЕ активным и наоборот.
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<bool> ChangeStatus(Guid resourceId)
+        {
+            var resource = await _context.Resources.FirstOrDefaultAsync(r => r.Id == resourceId);
+            if (resource != null)
+            {
+                //Меняем статус на противоположный
+                resource.IsActive = !resource.IsActive;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
     }
 }

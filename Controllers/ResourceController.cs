@@ -40,5 +40,10 @@ namespace WarehouseAccounting.Controllers
         {
             return await _resourceStorage.DeleteById(id);
         }
+        [HttpPut("ChangeStatus")]
+        public async Task<bool> ChangeStatus(Guid id)
+        {
+            return await _resourceStorage.ChangeStatus(id);
+        }
     }
 }
