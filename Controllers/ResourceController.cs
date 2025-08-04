@@ -35,5 +35,10 @@ namespace WarehouseAccounting.Controllers
         {
             return await _resourceStorage.Create(resource);
         }
+        [HttpDelete("DeleteResource")]
+        public async Task<ActionResult<bool>> DeleteById(Guid id)
+        {
+            return await _resourceStorage.DeleteById(id);
+        }
     }
 }
