@@ -21,7 +21,7 @@ namespace WarehouseAccounting
             // Сервисы для работы с базой данных
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlite("Data Source=MyDb.db"));
             builder.Services.AddTransient<IResourceStorage, ResourceStorage>();
-            
+            builder.Services.AddTransient<IUnitOfMeasurementStorage, UnitOfMeasurementStorage>();
 
             var app = builder.Build();
 
