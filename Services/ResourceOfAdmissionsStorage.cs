@@ -14,8 +14,7 @@ namespace WarehouseAccounting.Services
             _context = context;
         }
 
-        [HttpGet("Create")]
-        public async Task<ActionResult<bool>> Create(ResourceOfAdmission resourceOfAdmission)
+        public async Task<bool> Create(ResourceOfAdmission resourceOfAdmission)
         {
             //Нельзя создать ресурс поступления с таким же Id, который уже существует. 
             if (_context.ResourceOfAdmissions.FirstOrDefault(ra => ra.Id == resourceOfAdmission.Id) == null)
@@ -26,7 +25,6 @@ namespace WarehouseAccounting.Services
             await _context.SaveChangesAsync();
             return true;
         }
-        [HttpDelete("Delete")]
         public async Task<bool> Delete(Guid id)
         {
             var resourceOfAdmissions = await _context.ResourceOfAdmissions.FirstOrDefaultAsync(ra => ra.Id == id);
