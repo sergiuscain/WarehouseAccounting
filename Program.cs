@@ -19,7 +19,8 @@ namespace WarehouseAccounting
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             // Сервисы для работы с базой данных
-            builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlite("Data Source=MyDb.db"));
+            string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(connection));
             builder.Services.AddTransient<IResourceStorage, ResourceStorage>();
             builder.Services.AddTransient<IUnitOfMeasurementStorage, UnitOfMeasurementStorage>();
 
