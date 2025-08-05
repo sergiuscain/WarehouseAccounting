@@ -5,6 +5,9 @@ namespace WarehouseAccounting.Interfaces
 {
     public interface IResourceOfAdmissionsStorage
     {
+
+        Task GetAll();
+        Task<ResourceOfAdmission> GetById(Guid id);
         Task<bool> Create(ResourceOfAdmission resourceOfAdmission);
         Task<bool> Delete(Guid id);
     }

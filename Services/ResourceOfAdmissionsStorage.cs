@@ -13,7 +13,14 @@ namespace WarehouseAccounting.Services
         {
             _context = context;
         }
-
+        public async Task<ResourceOfAdmission> GetById(Guid id)
+        {
+            return await _context.ResourceOfAdmissions.FirstOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task GetAll()
+        {
+            await _context.ResourceOfAdmissions.ToListAsync();
+        }
         public async Task<bool> Create(ResourceOfAdmission resourceOfAdmission)
         {
             //Нельзя создать ресурс поступления с таким же Id, который уже существует. 
@@ -37,5 +44,6 @@ namespace WarehouseAccounting.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
     }
 }
