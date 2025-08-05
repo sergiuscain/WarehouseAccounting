@@ -7,5 +7,6 @@
         public Resource ResourceId { get; set; }
         public UnitOfMeasurement UnitOfMeasurement { get; set; }
         public int Count { get; set; }
+        public Guid AdmissionDocumentId { get; set; }
     }
 }
