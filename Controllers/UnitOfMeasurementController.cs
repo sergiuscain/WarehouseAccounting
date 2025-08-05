@@ -26,12 +26,12 @@ namespace WarehouseAccounting.Controllers
             return await _unitOfMeasurementStorage.GetById(id);
         }
 
-        [HttpPost("CreateUnitOfMeasurement")]
+        [HttpPost("Create")]
         public async Task<ActionResult<bool>> Create(UnitOfMeasurement unitOfMeasurement)
         {
             return await _unitOfMeasurementStorage.Create(unitOfMeasurement);
         }
-        [HttpDelete("DeleteUnitOfMeasurement")]
+        [HttpDelete("Delete")]
         public async Task<ActionResult<bool>> DeleteById(Guid id)
         {
             return await _unitOfMeasurementStorage.DeleteById(id);
@@ -41,13 +41,13 @@ namespace WarehouseAccounting.Controllers
         {
             return await _unitOfMeasurementStorage.ChangeStatus(id);
         }
-        [HttpGet("GetUitOfMeasurement")]
-        public async Task<ActionResult<List<UnitOfMeasurement>>> GetUnitOfMeasurementByStatus(bool isActive)
+        [HttpGet("GetByStatus")]
+        public async Task<ActionResult<List<UnitOfMeasurement>>> GetByStatus(bool isActive)
         {
             return await _unitOfMeasurementStorage.GetByStatus(isActive);
         }
-        [HttpPut("ChangeUnitOfMeasurementById")]
-        public async Task<ActionResult<bool>> ChangeUnitOfMeasurementById(Guid id, string newName)
+        [HttpPut("ChangeNameById")]
+        public async Task<ActionResult<bool>> ChangeNameById(Guid id, string newName)
         {
             return await _unitOfMeasurementStorage.ChangeName(id, newName);
         }

@@ -107,7 +107,7 @@ namespace WarehouseAccounting.Services
         /// <param name="isActive">Является ли ресурс активным</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<List<Resource>> GetResourcesByStatus(bool isActive)
+        public async Task<List<Resource>> GetByStatus(bool isActive)
         {
             return await _context.Resources.Where(r => r.IsActive == isActive).ToListAsync();
         }

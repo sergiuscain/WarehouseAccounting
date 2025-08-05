@@ -23,6 +23,7 @@ namespace WarehouseAccounting
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(connection));
             builder.Services.AddTransient<IResourceStorage, ResourceStorage>();
             builder.Services.AddTransient<IUnitOfMeasurementStorage, UnitOfMeasurementStorage>();
+            builder.Services.AddTransient<IAdmissionDocumentsStorage, AdmissionDocumentsStorage>();
 
             var app = builder.Build();
 

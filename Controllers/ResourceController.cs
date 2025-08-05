@@ -26,12 +26,12 @@ namespace WarehouseAccounting.Controllers
             return await _resourceStorage.GetById(id);
         }
 
-        [HttpPost("CreateResource")]
+        [HttpPost("Create")]
         public async Task<ActionResult<bool>> Create(Resource resource)
         {
             return await _resourceStorage.Create(resource);
         }
-        [HttpDelete("DeleteResource")]
+        [HttpDelete("Delete")]
         public async Task<ActionResult<bool>> DeleteById(Guid id)
         {
             return await _resourceStorage.DeleteById(id);
@@ -41,13 +41,13 @@ namespace WarehouseAccounting.Controllers
         {
             return await _resourceStorage.ChangeStatus(id);
         }
-        [HttpGet("GetResourcesByStatus")]
-        public async Task<ActionResult<List<Resource>>> GetResourcesByStatus(bool isActive)
+        [HttpGet("GetByStatus")]
+        public async Task<ActionResult<List<Resource>>> GetByStatus(bool isActive)
         {
-            return await _resourceStorage.GetResourcesByStatus(isActive);
+            return await _resourceStorage.GetByStatus(isActive);
         }
-        [HttpPut("ChangeResourceNameById")]
-        public async Task<ActionResult<bool>> ChangeResourceNameById(Guid id, string newResourceName)
+        [HttpPut("ChangeNameById")]
+        public async Task<ActionResult<bool>> ChangeNameById(Guid id, string newResourceName)
         {
             return await _resourceStorage.ChangeName(id, newResourceName);
         }
