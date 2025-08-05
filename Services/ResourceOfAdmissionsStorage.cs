@@ -17,9 +17,9 @@ namespace WarehouseAccounting.Services
         {
             return await _context.ResourceOfAdmissions.FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task GetAll()
+        public async Task<List<ResourceOfAdmission>> GetAll()
         {
-            await _context.ResourceOfAdmissions.ToListAsync();
+            return await _context.ResourceOfAdmissions.ToListAsync();
         }
         public async Task<bool> Create(ResourceOfAdmission resourceOfAdmission)
         {
@@ -32,6 +32,11 @@ namespace WarehouseAccounting.Services
             await _context.SaveChangesAsync();
             return true;
         }
+        /// <summary>
+        /// Удаляем ресурс поступления, если он не используется где-то.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> Delete(Guid id)
         {
             var resourceOfAdmissions = await _context.ResourceOfAdmissions.FirstOrDefaultAsync(ra => ra.Id == id);

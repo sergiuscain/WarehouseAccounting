@@ -24,6 +24,7 @@ namespace WarehouseAccounting
             builder.Services.AddTransient<IResourceStorage, ResourceStorage>();
             builder.Services.AddTransient<IUnitOfMeasurementStorage, UnitOfMeasurementStorage>();
             builder.Services.AddTransient<IAdmissionDocumentsStorage, AdmissionDocumentsStorage>();
+            builder.Services.AddTransient<IResourceOfAdmissionsStorage, ResourceOfAdmissionsStorage>();
 
             var app = builder.Build();
 
