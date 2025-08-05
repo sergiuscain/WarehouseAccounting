@@ -75,13 +75,18 @@ namespace WarehouseAccounting.Services
         public async Task<bool> DeleteById(Guid unitOfMeasurementId)
         {
             var unitOfMeasurement = await GetById(unitOfMeasurementId);
-            if (unitOfMeasurement != null)
+            if (unitOfMeasurement == null)
             {
-                _context.UnitOfMeasurements.Remove(unitOfMeasurement);
-                await _context.SaveChangesAsync();
-                return true;
+                return false;
             }
-            return false;
+            //Второе бизнес правило: Невозможно удалить  ...Единицу измерения..., если они где-то используются, но можно перевести их в архив...
+            if (await _context.ResourceOfAdmissions.FirstOrDefaultAsync(ra => ra.UnitOfMeasurement.Id == unitOfMeasurementId) != null)
+            {
+                return false;
+            }
+            _context.UnitOfMeasurements.Remove(unitOfMeasurement);
+            await _context.SaveChangesAsync();
+            return true;
         }
         /// <summary>
         /// Меняет статус единицы измерения на противоположный. Если она активен, делает её НЕ активной и наоборот.
