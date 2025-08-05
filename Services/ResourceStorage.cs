@@ -21,7 +21,7 @@ namespace WarehouseAccounting.Services
         {
             if(_context.Resources.Count() == 0)
             {
-                _context.Resources.AddRangeAsync(new List<Resource> {
+                await _context.Resources.AddRangeAsync(new List<Resource> {
                     new Resource {Id = Guid.NewGuid(), IsActive = true, Name = "ABS филамент" },
                     new Resource {Id = Guid.NewGuid(), IsActive = true, Name = "PLA филамент" },
                     new Resource {Id = Guid.NewGuid(), IsActive = true, Name = "TPU филамент" },
@@ -77,6 +77,11 @@ namespace WarehouseAccounting.Services
             var resource = await GetById(resourceId);
             if (resource != null)
             {
+                //Второе бизнес правило: Невозможно удалить Ресурс,..., если они где-то используются, но можно перевести их в архив...
+                if (_context.ResourceOfAdmissions.Where(ra => ra.Resource.Id == resourceId) == null)
+                {
+                    return false;
+                }
                 _context.Resources.Remove(resource);
                 await _context.SaveChangesAsync();
                 return true;

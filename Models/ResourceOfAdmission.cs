@@ -5,7 +5,7 @@
     {
         public Guid Id { get; set; }
         public AdmissionDocument AdmissionDocument { get; set; }
-        public Resource ResourceId { get; set; }
+        public Resource Resource { get; set; }
         public UnitOfMeasurement UnitOfMeasurement { get; set; }
         public int Count { get; set; }
     }
